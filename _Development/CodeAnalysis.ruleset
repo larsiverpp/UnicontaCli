@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="All" Description="All" ToolsVersion="10.0">
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <Rule Id="SA1101" Action="None" /> <!-- PrefixLocalCallsWithThis -->
+    <Rule Id="SA1118" Action="None" /> <!-- ParameterMustNotSpanMultipleLines -->
+    <Rule Id="SA1204" Action="None" /> <!-- StaticElementsMustAppearBeforeInstanceElements -->
+    <Rule Id="SA1400" Action="None" /> <!-- AccessModifierMustBeDeclared -->
+    <Rule Id="SA1413" Action="None" /> <!-- UseTrailingCommasInMultiLineInitializers -->
+    <Rule Id="SA1600" Action="None" /> <!-- ElementsMustBeDocumented -->
+    <Rule Id="SA1601" Action="None" /> <!-- PartialElementsMustBeDocumented -->
+    <Rule Id="SA1602" Action="None" /> <!-- EnumerationItemsMustBeDocumented -->
+    <Rule Id="SA1633" Action="None" /> <!-- FileMustHaveHeader -->
+  </Rules>
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.FxCopAnalyzers" RuleNamespace="Microsoft.CodeAnalysis.FxCopAnalyzers">
+    <Rule Id="CA1014" Action="None" /> <!-- Mark assemblies with CLSCompliantAttribute -->
+    <Rule Id="CA1031" Action="None" /> <!-- DoNotCatchGeneralExceptionTypes -->
+    <Rule Id="CA1032" Action="None" /> <!-- ImplementStandardExceptionConstructors -->
+    <Rule Id="CA1036" Action="None" /> <!-- OverrideMethodsOnComparableTypes -->
+    <Rule Id="CA1062" Action="None" /> <!-- ValidateArgumentsOfPublicMethods -->
+    <Rule Id="CA1308" Action="None" /> <!-- NormalizeStringsToUppercase -->
+    <Rule Id="CA1515" Action="None" /> <!-- Consider making public types internal -->
+    <Rule Id="CA1707" Action="None" /> <!-- Identifiers should not contain underscores -->
+    <Rule Id="CA1711" Action="None" /> <!-- Identifiers should not have incorrect suffix -->
+    <Rule Id="CA1716" Action="None" /> <!-- IdentifiersShouldNotMatchKeywords -->
+    <Rule Id="CA1724" Action="None" /> <!-- TypeNamesShouldNotMatchNamespaces -->
+    <Rule Id="CA1812" Action="None" /> <!-- AvoidUninstantiatedInternalClasses -->
+    <Rule Id="CA1822" Action="None" /> <!-- MarkMembersAsStatic -->
+    <Rule Id="CA2007" Action="None" /> <!-- DoNotDirectlyAwaitATaskAnalyzer -->
+    <Rule Id="CA2225" Action="None" /> <!-- OperatorOverloadsHaveNamedAlternates -->
+    <Rule Id="CA2229" Action="None" /> <!-- ImplementSerializationConstructors -->
+  </Rules>
+  <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
+    <Rule Id="S1199" Action="None" /> <!-- Extract this nested code block into a separate method. -->
+    <Rule Id="S2325" Action="None" /> <!-- Methods and properties that don't access instance data should be static. -->
+    <Rule Id="S3925" Action="None" /> <!-- Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. -->
+    <Rule Id="S6960" Action="None" /> <!-- Controllers should not have mixed responsibilities. -->
+    <Rule Id="S6967" Action="None" /> <!-- ModelState.IsValid should be called in controller actions. -->
+  </Rules>
+</RuleSet>

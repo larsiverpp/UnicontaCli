@@ -1,0 +1,11 @@
+*.user
+
+bin/
+obj/
+
+*.ncrunchproject
+*.ncrunchsolution
+?NCrunch_*/
+nCrunchTemp_*
+
+.vs/

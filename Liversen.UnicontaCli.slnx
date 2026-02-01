@@ -1,0 +1,17 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Project Path="Liversen.StronglyTypedIds/Liversen.StronglyTypedIds.csproj">
+    <Platform Project="x64" />
+  </Project>
+  <Project Path="Liversen.UnicontaCli.Tests/Liversen.UnicontaCli.Tests.csproj">
+    <Platform Project="x64" />
+  </Project>
+  <Project Path="Liversen.UnicontaCli/Liversen.UnicontaCli.csproj">
+    <Platform Project="x64" />
+  </Project>
+</Solution>

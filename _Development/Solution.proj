@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="_Build;_Test">
+  <Import Project="Base.props" />
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <SolutionDir>$(MSBuildProjectDirectory)\..</SolutionDir>
+    <SolutionFile Condition="'$(SolutionFile)' == ''">$(SolutionDir)\$(SolutionName).slnx</SolutionFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="ReportGenerator" Version="5.5.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <DeploymentFile Include="Deployment\*;..\docker-compose.yml*">
+      <DestinationFolder>$(ArtifactDirectory)</DestinationFolder>
+    </DeploymentFile>
+  </ItemGroup>
+  <Target Name="_Build" DependsOnTargets="_Restore">
+    <MakeDir Directories="$(ArtifactDirectory)" />
+    <MSBuild Projects="$(SolutionFile)" Targets="build;publish" Properties="Configuration=$(Configuration);NoRestore=true" BuildInParallel="true" />
+    <CallTarget Targets="CopyDeploymentFiles" />
+  </Target>
+  <Target Name="_Test">
+    <PropertyGroup>
+      <TestResultsDirectory>$(MSBuildProjectDirectory)\obj\TestResults</TestResultsDirectory>
+      <TestReportDirectory>$(MSBuildProjectDirectory)\obj\TestReport</TestReportDirectory>
+      <TestFilter Condition="'$(TestFilter)' == '' And '$(RunAllTests)' != 'true'">Category!=Unstable</TestFilter>
+      <TestCoverageArguments Condition="'$(IncludeTestCoverage)' == 'true'">--collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover</TestCoverageArguments>
+    </PropertyGroup>
+    <RemoveDir Directories="$(TestResultsDirectory);$(TestReportDirectory)" />
+    <Exec Command="dotnet test $(SolutionFile) -c $(Configuration) --no-restore --no-build --logger &quot;trx&quot; --filter &quot;$(TestFilter)&quot; --results-directory $(TestResultsDirectory) $(TestCoverageArguments)" />
+    <ItemGroup>
+      <CoverageFile Include="$(SolutionDir)\**\obj\TestResults\*\coverage.cobertura.xml" />
+      <CoverageFile Include="$(SolutionDir)\**\obj\TestResults\*\coverage.opencover.xml" />
+    </ItemGroup>
+    <ReportGenerator Condition="'$(IncludeTestCoverage)' == 'true'" ReportFiles="@(CoverageFile)" TargetDirectory="$(TestReportDirectory)" ReportTypes="Html;Cobertura" />
+  </Target>
+  <Target Name="_Clean" DependsOnTargets="_Restore">
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\bin;$(MSBuildProjectDirectory)\obj" ContinueOnError="true" />
+    <MSBuild Projects="$(SolutionFile)" Targets="clean" Properties="Configuration=$(Configuration);CleanBinObj=true;NoRestore=true" BuildInParallel="true" ContinueOnError="true" />
+  </Target>
+  <Target Name="_Restore">
+    <MSBuild Projects="$(SolutionFile)" Targets="restore" Properties="Configuration=$(Configuration)" BuildInParallel="true" />
+  </Target>
+  <Import Project="Base.targets" />
+</Project>

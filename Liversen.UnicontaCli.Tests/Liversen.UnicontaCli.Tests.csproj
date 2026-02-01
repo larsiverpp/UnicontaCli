@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Liversen.UnicontaCli</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Liversen.UnicontaCli\Liversen.UnicontaCli.csproj" />
+  </ItemGroup>
+  <Import Project="..\_Development\TestProject.targets" />
+</Project>
