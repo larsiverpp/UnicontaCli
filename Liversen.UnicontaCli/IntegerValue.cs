@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Liversen.StronglyTypedIds;
+namespace Liversen.UnicontaCli;
 
-public record IntegerValue<TValue> : IIntegerValue, IComparable<TValue>
+public record IntegerValue<TValue> : IComparable<TValue>
     where TValue : IntegerValue<TValue>
 {
     public IntegerValue(int value)
@@ -12,8 +12,6 @@ public record IntegerValue<TValue> : IIntegerValue, IComparable<TValue>
     }
 
     public int Value { get; }
-
-    public object ObjectValue() => Value;
 
     public sealed override string ToString() =>
         Value.ToString(CultureInfo.InvariantCulture);

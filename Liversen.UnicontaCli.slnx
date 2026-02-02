@@ -6,9 +6,6 @@
     <File Path=".editorconfig" />
     <File Path="README.md" />
   </Folder>
-  <Project Path="Liversen.StronglyTypedIds/Liversen.StronglyTypedIds.csproj">
-    <Platform Project="x64" />
-  </Project>
   <Project Path="Liversen.UnicontaCli.Tests/Liversen.UnicontaCli.Tests.csproj">
     <Platform Project="x64" />
   </Project>

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Liversen.StronglyTypedIds;
+namespace Liversen.UnicontaCli;
 
-public record NonEmptyStringValue<TValue> : INonEmptyStringValue, IComparable<TValue>
+public record NonEmptyStringValue<TValue> : IComparable<TValue>
     where TValue : NonEmptyStringValue<TValue>
 {
     public NonEmptyStringValue(string value)
@@ -15,8 +15,6 @@ public record NonEmptyStringValue<TValue> : INonEmptyStringValue, IComparable<TV
     }
 
     public string Value { get; }
-
-    public object ObjectValue() => Value;
 
     public sealed override string ToString() =>
         Value;
