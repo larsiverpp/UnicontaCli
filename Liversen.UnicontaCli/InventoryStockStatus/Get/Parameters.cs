@@ -8,11 +8,18 @@ sealed record Parameters(
 
     bool CsvOutput,
 
+    string? OutputPath,
+
     CultureInfo Culture)
 {
-    public static Parameters Create(string valueAt, bool csvOutput, string cultureName) =>
+    public static Parameters Create(
+        string valueAt,
+        bool csvOutput,
+        string? outputPath,
+        string cultureName) =>
         new(
             ValueAt: LocalDateConverter.ParseExtendedFormat(valueAt),
             CsvOutput: csvOutput,
+            OutputPath: outputPath,
             Culture: new(cultureName));
 }

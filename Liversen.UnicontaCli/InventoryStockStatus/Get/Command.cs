@@ -8,12 +8,24 @@ class Command : System.CommandLine.Command
     public Command(IServiceProviderFactory serviceProviderFactory)
         : base("get", "Get inventory stock status")
     {
-        var valueAtArgument = new Argument<string>("valueAt");
+        var valueAtArgument = new Argument<string>("valueAt")
+        {
+            Description = "Date to get the inventory stock status at (format: yyyy-MM-dd)"
+        };
         Add(valueAtArgument);
-        var csvOutputOption = new Option<bool>("--csv");
+        var csvOutputOption = new Option<bool>("--csv")
+        {
+            Description = "Output as CSV file separated by tabs"
+        };
         Add(csvOutputOption);
+        var outputPathOption = new Option<string>("--outputPath")
+        {
+            Description = "Ouput to file instead of console"
+        };
+        Add(outputPathOption);
         var cultureNameOption = new Option<string>("--culture")
         {
+            Description = "Culture name for formatting (default: da-DK)",
             DefaultValueFactory = _ => "da-DK"
         };
         Add(cultureNameOption);
@@ -26,6 +38,7 @@ class Command : System.CommandLine.Command
                     Get.Parameters.Create(
                         valueAt: parseResult.GetRequiredValue(valueAtArgument),
                         csvOutput: parseResult.GetValue(csvOutputOption),
+                        outputPath: parseResult.GetValue(outputPathOption),
                         cultureName: parseResult.GetRequiredValue(cultureNameOption)));
         });
     }

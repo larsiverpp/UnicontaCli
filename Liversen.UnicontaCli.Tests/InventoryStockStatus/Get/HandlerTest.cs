@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Globalization;
+using System.IO;
 using System.Threading.Tasks;
 using NodaTime;
 using Shouldly;
@@ -38,7 +39,7 @@ public sealed class HandlerTest : Test.Context
     {
         AddTestData();
 
-        await Sut.Run(new(ValueAt: ValueAt, CsvOutput: false, CultureInfo.InvariantCulture));
+        await Sut.Run(new(ValueAt: ValueAt, CsvOutput: false, OutputPath: null, CultureInfo.InvariantCulture));
 
         var consoleLines = GetConsoleLines();
         consoleLines.ShouldBe(
@@ -57,7 +58,7 @@ public sealed class HandlerTest : Test.Context
     {
         AddTestData();
 
-        await Sut.Run(new(ValueAt: ValueAt, CsvOutput: true, CultureInfo.InvariantCulture));
+        await Sut.Run(new(ValueAt: ValueAt, CsvOutput: true, OutputPath: null, CultureInfo.InvariantCulture));
 
         var consoleLines = GetConsoleLines();
         consoleLines.ShouldBe(
@@ -68,6 +69,26 @@ public sealed class HandlerTest : Test.Context
             "AB1234\tValve\t10\t12.00\t2025-01-01\t1.00\t12.00",
             "=== TOTALS ===\t\t\t132.00\t\t\t72.00",
             string.Empty
+        ]);
+    }
+
+    [Fact]
+    public async Task GivenStatusesAndTransactions_WhenExecutingWithCsvOutputAndOutputPath_ThenCsvOutputInOutputFile()
+    {
+        AddTestData();
+        using var tempDir = new TemporaryDirectory();
+        var outputFile = Path.Combine(tempDir.Location, "out.csv");
+
+        await Sut.Run(new(ValueAt: ValueAt, CsvOutput: true, OutputPath: outputFile, CultureInfo.InvariantCulture));
+
+        var fileLines = await File.ReadAllLinesAsync(outputFile);
+        fileLines.ShouldBe(
+        [
+            "=== InventoryStockStatus 2025-12-31 ===",
+            "InventoryNumber\tName\tQuantity\tFullValue\tLastMovement\tFraction\tReducedValue",
+            "AB123\tExpensive valve\t5\t120.00\t2024-12-30\t0.50\t60.00",
+            "AB1234\tValve\t10\t12.00\t2025-01-01\t1.00\t12.00",
+            "=== TOTALS ===\t\t\t132.00\t\t\t72.00"
         ]);
     }
 
