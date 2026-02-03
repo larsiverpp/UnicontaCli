@@ -25,7 +25,7 @@ class Command : System.CommandLine.Command
         Add(outputPathOption);
         var cultureNameOption = new Option<string>("--culture")
         {
-            Description = "Culture name for formatting (default: da-DK)",
+            Description = "Culture name for formatting (format: see Locale Code at https://simplelocalize.io/data/locales)",
             DefaultValueFactory = _ => "da-DK"
         };
         Add(cultureNameOption);
