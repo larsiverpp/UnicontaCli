@@ -6,7 +6,22 @@ namespace Liversen.UnicontaCli.InventoryStockStatus.Get;
 class Command : System.CommandLine.Command
 {
     public Command(IServiceProviderFactory serviceProviderFactory)
-        : base("get", "Get inventory stock status")
+        : base(
+            "get",
+            """
+            Gets inventory stock status at a given date.
+            
+            The status includes two values:
+            - A full value identical to the value that can be seen in Uniconta.
+            - A reduced value that is calculated by doing a write-down of items that have been in stock for a period with no movements.
+            
+            The write-down is done as follows:
+            - If no movements have occurred for the last year, a write-down of 50% is done.
+            - If no movements have occurred for the last two years, a write-down of 75% is done.
+            - If no movements have occurred for the last three years, a write-down of 100% is done.
+            
+            Movement types considered are CREDITOR and DEBTOR.
+            """)
     {
         var valueAtArgument = new Argument<string>("valueAt")
         {
