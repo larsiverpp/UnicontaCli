@@ -26,6 +26,7 @@ class Helper
         {
             var statuses = await ucClient.GetInventoryStockStatuses(valueAt);
             var transactions = (await ucClient.GetInventoryTransactions(valueAt.Plus(-Period.FromYears(3))))
+                .Where(x => x.Date <= valueAt)
                 .Where(x => IncludedMovementTypes.Contains(x.MovementType))
                 .GroupBy(x => x.InventoryNumber)
                 .ToImmutableDictionary(x => x.Key, x => x.ToImmutableArray());

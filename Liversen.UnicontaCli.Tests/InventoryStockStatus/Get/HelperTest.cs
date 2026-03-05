@@ -44,6 +44,27 @@ public sealed class HelperTest : Test.Context
     }
 
     [Fact]
+    public async Task GivenSingleStatusAndTransactionAfterValueAt_WhenGetting_ThenSingleItemWithFractionZero()
+    {
+        var valueAt = TestData.RandomLocalDate();
+        var status = UcClient.AddStatus(Api.UcQuery.TestData.RandomInventoryStockStatus(date: valueAt));
+        UcClient.AddTransaction(Api.UcQuery.TestData.RandomInventoryTransaction(
+            inventoryNumber: status.InventoryNumber,
+            date: valueAt.PlusDays(1),
+            movementType: RandomMovementType()));
+
+        var collection = await Sut.Get(valueAt);
+
+        collection.Items.ShouldHaveSingleItem().ShouldBe(new(
+            InventoryNumber: status.InventoryNumber,
+            Name: status.Name,
+            Quantity: status.Quantity,
+            FullValue: status.CostValue,
+            LastMovement: null,
+            Fraction: 0));
+    }
+
+    [Fact]
     public async Task GivenSingleStatusAndRecentTransaction_WhenGetting_ThenSingleItemWithFractionOne()
     {
         var valueAt = TestData.RandomLocalDate();
