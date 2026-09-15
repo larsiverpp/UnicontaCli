@@ -19,29 +19,25 @@ class Handler : ICommandHandler<Parameters>
         this.console = console;
     }
 
-    public static string HeaderLine(LocalDate valueAt) =>
-        $"=== InventoryStockStatus {LocalDateConverter.Serialize(valueAt)} ===";
-
     public async Task Run(Parameters parameters)
     {
         var collection = await helper.Get(parameters.ValueAt);
-        var rows = collection.Rows(parameters.Culture);
+        var rows = collection.Rows(parameters.Culture, parameters.ValueAt);
         var lines = parameters.CsvOutput ? ItemRow.ToCsvLines(rows) : ItemRow.ToScreenLines(rows);
         if (string.IsNullOrEmpty(parameters.OutputPath))
         {
-            await WriteLines(console.Output, parameters.ValueAt, lines);
+            await WriteLines(console.Output, lines);
         }
         else
         {
             await using var stream = File.Open(parameters.OutputPath, FileMode.Create, FileAccess.Write, FileShare.None);
             await using var writer = new StreamWriter(stream, new UTF8Encoding(true));
-            await WriteLines(writer, parameters.ValueAt, lines);
+            await WriteLines(writer, lines);
         }
     }
 
-    static async Task WriteLines(TextWriter writer, LocalDate valueAt, ImmutableArray<string> lines)
+    static async Task WriteLines(TextWriter writer, ImmutableArray<string> lines)
     {
-        await writer.WriteLineAsync(HeaderLine(valueAt));
         foreach (var line in lines)
         {
             await writer.WriteLineAsync(line);

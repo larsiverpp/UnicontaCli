@@ -45,11 +45,10 @@ public sealed class HandlerTest : Test.Context
         var consoleLines = GetConsoleLines();
         consoleLines.ShouldBe(
         [
-            "=== InventoryStockStatus 2025-12-31 ===",
-            "InventoryNumber Name            Quantity FullValue LastMovement Fraction ReducedValue",
-            "AB123           Expensive valve        5    120.00   2024-12-30     0.50        60.00",
-            "AB1234          Valve                 10     12.00   2025-01-01     1.00        12.00",
-            "=== TOTALS ===                              132.00                              72.00",
+            "InventoryNumber     Name            Quantity FullValue LastMovement Fraction ReducedValue",
+            "AB123               Expensive valve        5    120.00   2024-12-30     0.50        60.00",
+            "AB1234              Valve                 10     12.00   2025-01-01     1.00        12.00",
+            "TOTALS [2025-12-31]                             132.00                              72.00",
             string.Empty
         ]);
     }
@@ -64,11 +63,10 @@ public sealed class HandlerTest : Test.Context
         var consoleLines = GetConsoleLines();
         consoleLines.ShouldBe(
         [
-            "=== InventoryStockStatus 2025-12-31 ===",
             "InventoryNumber\tName\tQuantity\tFullValue\tLastMovement\tFraction\tReducedValue",
             "AB123\tExpensive valve\t5\t120.00\t2024-12-30\t0.50\t60.00",
             "AB1234\tValve\t10\t12.00\t2025-01-01\t1.00\t12.00",
-            "=== TOTALS ===\t\t\t132.00\t\t\t72.00",
+            "TOTALS [2025-12-31]\t\t\t132.00\t\t\t72.00",
             string.Empty
         ]);
     }
@@ -85,11 +83,10 @@ public sealed class HandlerTest : Test.Context
         var fileLines = await File.ReadAllLinesAsync(outputFile, CancellationToken.None);
         fileLines.ShouldBe(
         [
-            "=== InventoryStockStatus 2025-12-31 ===",
             "InventoryNumber\tName\tQuantity\tFullValue\tLastMovement\tFraction\tReducedValue",
             "AB123\tExpensive valve\t5\t120.00\t2024-12-30\t0.50\t60.00",
             "AB1234\tValve\t10\t12.00\t2025-01-01\t1.00\t12.00",
-            "=== TOTALS ===\t\t\t132.00\t\t\t72.00"
+            "TOTALS [2025-12-31]\t\t\t132.00\t\t\t72.00"
         ]);
     }
 

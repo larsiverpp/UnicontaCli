@@ -2,14 +2,13 @@
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
+using NodaTime;
 
 namespace Liversen.UnicontaCli.InventoryStockStatus.Get;
 
 record ItemCollection(
     ImmutableArray<Item> Items)
 {
-    public const string TotalsLabel = "=== TOTALS ===";
-
     public static readonly ItemRow HeaderRow = new(
         InventoryNumber: "InventoryNumber",
         Name: "Name",
@@ -25,19 +24,22 @@ record ItemCollection(
     public decimal ReducedValue =>
         Items.Sum(line => line.ReducedValue);
 
-    public ImmutableArray<ItemRow> Rows(CultureInfo cultureInfo) =>
+    public static string TotalsLabel(LocalDate valueAt) =>
+        $"TOTALS [{LocalDateConverter.Serialize(valueAt)}]";
+
+    public ImmutableArray<ItemRow> Rows(CultureInfo cultureInfo, LocalDate valueAt) =>
     [
         HeaderRow,
         ..ItemRows(cultureInfo),
-        FooterRow(cultureInfo)
+        FooterRow(cultureInfo, valueAt)
     ];
 
     public IEnumerable<ItemRow> ItemRows(CultureInfo cultureInfo) =>
         Items.Select(x => x.ToItemRow(cultureInfo));
 
-    public ItemRow FooterRow(CultureInfo cultureInfo) =>
+    public ItemRow FooterRow(CultureInfo cultureInfo, LocalDate valueAt) =>
         new(
-                InventoryNumber: TotalsLabel,
+                InventoryNumber: TotalsLabel(valueAt),
                 Name: string.Empty,
                 Quantity: string.Empty,
                 FullValue: Item.SerializeAmount(FullValue, cultureInfo),

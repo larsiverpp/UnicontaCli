@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
+using NodaTime;
 using Shouldly;
 using Xunit;
 
@@ -8,6 +9,8 @@ namespace Liversen.UnicontaCli.InventoryStockStatus.Get;
 
 public static class ItemCollectionTest
 {
+    static readonly LocalDate ValueAt = TestData.RandomLocalDate();
+
     static readonly ImmutableArray<Item> Items = [
         new(
             InventoryNumber: new("AB123"),
@@ -46,19 +49,19 @@ public static class ItemCollectionTest
     public static void GivenCollection_WhenGettingRows_ThenRows()
     {
         var collection = new ItemCollection(Items);
-        collection.Rows(TestCulture).ShouldBe(
+        collection.Rows(TestCulture, ValueAt).ShouldBe(
         [
             ItemCollection.HeaderRow,
             ..Items.Select(x => x.ToItemRow(TestCulture)),
-            collection.FooterRow(TestCulture)
+            collection.FooterRow(TestCulture, ValueAt)
         ]);
     }
 
     [Fact]
     public static void GivenCollection_WhenGettingFooterRow_ThenFooterRow() =>
-        new ItemCollection(Items).FooterRow(TestCulture).ShouldBe(
+        new ItemCollection(Items).FooterRow(TestCulture, ValueAt).ShouldBe(
             new(
-                InventoryNumber: ItemCollection.TotalsLabel,
+                InventoryNumber: ItemCollection.TotalsLabel(ValueAt),
                 Name: string.Empty,
                 Quantity: string.Empty,
                 FullValue: "42,183.00",
