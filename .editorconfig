@@ -2,3 +2,31 @@ root = true
 
 [*.cs]
 csharp_style_prefer_primary_constructors = false:silent
+
+# StyleCop Analyzers
+dotnet_diagnostic.SA1101.severity = none # PrefixLocalCallsWithThis
+dotnet_diagnostic.SA1118.severity = none # ParameterMustNotSpanMultipleLines
+dotnet_diagnostic.SA1204.severity = none # StaticElementsMustAppearBeforeInstanceElements
+dotnet_diagnostic.SA1400.severity = none # AccessModifierMustBeDeclared
+dotnet_diagnostic.SA1413.severity = none # UseTrailingCommasInMultiLineInitializers
+dotnet_diagnostic.SA1600.severity = none # ElementsMustBeDocumented
+dotnet_diagnostic.SA1602.severity = none # EnumerationItemsMustBeDocumented
+dotnet_diagnostic.SA1633.severity = none # FileMustHaveHeader
+
+# Microsoft.CodeAnalysis.FxCopAnalyzers
+dotnet_diagnostic.CA1036.severity = none # OverrideMethodsOnComparableTypes
+dotnet_diagnostic.CA1062.severity = none # ValidateArgumentsOfPublicMethods
+dotnet_diagnostic.CA1515.severity = none # Consider making public types internal
+dotnet_diagnostic.CA1707.severity = none # Identifiers should not contain underscores 
+dotnet_diagnostic.CA1711.severity = none # Identifiers should not have incorrect suffix
+dotnet_diagnostic.CA1716.severity = none # IdentifiersShouldNotMatchKeywords
+dotnet_diagnostic.CA1812.severity = none # AvoidUninstantiatedInternalClasses
+dotnet_diagnostic.CA1822.severity = none # MarkMembersAsStatic
+dotnet_diagnostic.CA2007.severity = none # DoNotDirectlyAwaitATaskAnalyzer
+
+# SonarAnalyzer.CSharp
+dotnet_diagnostic.S1210.severity = none # "Equals" and the comparison operators should be overridden when implementing "IComparable"
+
+# xUnit Analyzers
+dotnet_diagnostic.xUnit1041.severity = none # Fixture arguments to test classes must have fixture sources
+dotnet_diagnostic.xUnit1045.severity = none # Avoid using TheoryData type arguments that might not be serializable
