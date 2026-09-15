@@ -12,14 +12,14 @@ public sealed class TestFixture : IAsyncLifetime
 
     public QueryAPI Api => queryApi ?? throw new InvalidOperationException("No API");
 
-    public async Task InitializeAsync()
+    public async ValueTask InitializeAsync()
     {
         var (companyId, credentials) = TestData.CompanyIdCredentials();
         session = await UcSession.Create(credentials);
         queryApi = await session.CreateQueryApi(companyId);
     }
 
-    public async Task DisposeAsync()
+    public async ValueTask DisposeAsync()
     {
         if (session != null)
         {

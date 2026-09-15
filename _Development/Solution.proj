@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk" DefaultTargets="_Build;_Test">
   <Import Project="Base.props" />
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <SolutionDir>$(MSBuildProjectDirectory)\..</SolutionDir>
     <SolutionFile Condition="'$(SolutionFile)' == ''">$(SolutionDir)\$(SolutionName).slnx</SolutionFile>
   </PropertyGroup>
@@ -22,14 +22,13 @@
     <PropertyGroup>
       <TestResultsDirectory>$(MSBuildProjectDirectory)\obj\TestResults</TestResultsDirectory>
       <TestReportDirectory>$(MSBuildProjectDirectory)\obj\TestReport</TestReportDirectory>
-      <TestFilter Condition="'$(TestFilter)' == '' And '$(RunAllTests)' != 'true'">Category!=Unstable</TestFilter>
-      <TestCoverageArguments Condition="'$(IncludeTestCoverage)' == 'true'">--collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover</TestCoverageArguments>
+      <TestFilter Condition="'$(TestFilter)' == '' And '$(RunAllTests)' != 'true'">--filter-not-trait &quot;Category=Unstable&quot;</TestFilter>
+      <TestCoverageArguments Condition="'$(IncludeTestCoverage)' == 'true'">--coverage --coverage-output-format cobertura</TestCoverageArguments>
     </PropertyGroup>
     <RemoveDir Directories="$(TestResultsDirectory);$(TestReportDirectory)" />
-    <Exec Command="dotnet test $(SolutionFile) -c $(Configuration) --no-restore --no-build --logger &quot;trx&quot; --filter &quot;$(TestFilter)&quot; --results-directory $(TestResultsDirectory) $(TestCoverageArguments)" />
+    <Exec Command="dotnet test $(SolutionFile) -c $(Configuration) --no-restore --no-build --results-directory $(TestResultsDirectory) -- --report-trx $(TestFilter) $(TestCoverageArguments)" />
     <ItemGroup>
-      <CoverageFile Include="$(SolutionDir)\**\obj\TestResults\*\coverage.cobertura.xml" />
-      <CoverageFile Include="$(SolutionDir)\**\obj\TestResults\*\coverage.opencover.xml" />
+      <CoverageFile Include="$(TestResultsDirectory)\**\*.cobertura.xml" />
     </ItemGroup>
     <ReportGenerator Condition="'$(IncludeTestCoverage)' == 'true'" ReportFiles="@(CoverageFile)" TargetDirectory="$(TestReportDirectory)" ReportTypes="Html;Cobertura" />
   </Target>

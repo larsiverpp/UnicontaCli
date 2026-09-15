@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Globalization;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using NodaTime;
 using Shouldly;
@@ -81,7 +82,7 @@ public sealed class HandlerTest : Test.Context
 
         await Sut.Run(new(ValueAt: ValueAt, CsvOutput: true, OutputPath: outputFile, CultureInfo.InvariantCulture));
 
-        var fileLines = await File.ReadAllLinesAsync(outputFile);
+        var fileLines = await File.ReadAllLinesAsync(outputFile, CancellationToken.None);
         fileLines.ShouldBe(
         [
             "=== InventoryStockStatus 2025-12-31 ===",

@@ -1,17 +1,13 @@
 <Project>
   <Import Project="Project.targets" />
   <ItemGroup>
-    <PackageReference Include="coverlet.collector" Version="10.0.1">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="DiffEngine" Version="20.3.1" />
+    <!-- Xunit3 v3 does not support MTP v2 -->
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="[18.0.6]" />
+    <!-- Xunit3 v3 does not support MTP v2 -->
+    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="[1.9.1]" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
     <PackageReference Include="Shouldly" Version="4.3.0" />
-    <PackageReference Include="xunit" Version="2.9.3" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="4.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="xunit.v3" Version="3.2.2" LockMajorVersion="true" />
   </ItemGroup>
 </Project>
