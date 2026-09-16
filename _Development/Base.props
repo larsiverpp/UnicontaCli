@@ -2,7 +2,7 @@
   <PropertyGroup>
     <SolutionName>Liversen.UnicontaCli</SolutionName>
     <MajorVersion Condition="'$(MajorVersion)' == ''">1</MajorVersion>
-    <MinorVersion Condition="'$(MinorVersion)' == ''">0</MinorVersion>
+    <MinorVersion Condition="'$(MinorVersion)' == ''">1</MinorVersion>
     <PatchVersion Condition="'$(PatchVersion)' == ''">0</PatchVersion>
     <SemanticVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)</SemanticVersion>
     <ArtifactDirectory>$(MSBuildThisFileDirectory)obj\Artifacts</ArtifactDirectory>
