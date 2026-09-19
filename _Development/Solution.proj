@@ -13,7 +13,11 @@
       <DestinationFolder>$(ArtifactDirectory)</DestinationFolder>
     </DeploymentFile>
   </ItemGroup>
-  <Target Name="_Build" DependsOnTargets="_Restore">
+  <Target Name="_Restore">
+    <MSBuild Projects="$(SolutionFile)" Targets="restore" Properties="Configuration=$(Configuration)" BuildInParallel="true" />
+  </Target>
+  <Target Name="_Build" DependsOnTargets="_Restore;_BuildNoRestore"/>
+  <Target Name="_BuildNoRestore">
     <MakeDir Directories="$(ArtifactDirectory)" />
     <MSBuild Projects="$(SolutionFile)" Targets="build;publish" Properties="Configuration=$(Configuration);NoRestore=true" BuildInParallel="true" />
     <CallTarget Targets="CopyDeploymentFiles" />
@@ -35,9 +39,6 @@
   <Target Name="_Clean" DependsOnTargets="_Restore">
     <RemoveDir Directories="$(MSBuildProjectDirectory)\bin;$(MSBuildProjectDirectory)\obj" ContinueOnError="true" />
     <MSBuild Projects="$(SolutionFile)" Targets="clean" Properties="Configuration=$(Configuration);CleanBinObj=true;NoRestore=true" BuildInParallel="true" ContinueOnError="true" />
-  </Target>
-  <Target Name="_Restore">
-    <MSBuild Projects="$(SolutionFile)" Targets="restore" Properties="Configuration=$(Configuration)" BuildInParallel="true" />
   </Target>
   <Import Project="Base.targets" />
 </Project>

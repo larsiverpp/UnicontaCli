@@ -12,8 +12,10 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-      - name: Restore
+      - name: Restore Solution.proj
         run: dotnet restore _Development/Solution.proj
+      - name: Restore
+        run: dotnet msbuild _Development/Solution.proj /t:_Restore /p:Configuration=Release
       - name: Build
         run: dotnet msbuild _Development/Solution.proj /t:_Build /p:Configuration=Release
       - name: Test
