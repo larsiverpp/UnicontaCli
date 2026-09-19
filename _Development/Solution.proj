@@ -14,10 +14,9 @@
     </DeploymentFile>
   </ItemGroup>
   <Target Name="_Restore">
-    <MSBuild Projects="$(SolutionFile)" Targets="restore" Properties="Configuration=$(Configuration)" BuildInParallel="true" />
+    <MSBuild Projects="$(SolutionFile);$(MSBuildThisFileFullPath)" Targets="restore" Properties="Configuration=$(Configuration)" BuildInParallel="true" />
   </Target>
-  <Target Name="_Build" DependsOnTargets="_Restore;_BuildNoRestore"/>
-  <Target Name="_BuildNoRestore">
+  <Target Name="_Build">
     <MakeDir Directories="$(ArtifactDirectory)" />
     <MSBuild Projects="$(SolutionFile)" Targets="build;publish" Properties="Configuration=$(Configuration);NoRestore=true" BuildInParallel="true" />
     <CallTarget Targets="CopyDeploymentFiles" />
