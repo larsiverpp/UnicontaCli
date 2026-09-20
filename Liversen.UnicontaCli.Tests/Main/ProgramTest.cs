@@ -14,16 +14,16 @@ public static class ProgramTest
     {
         var (companyId, credentials) = Api.UcQuery.TestData.CompanyIdCredentials();
         var arguments = ImmutableArray.Create(
-            "--loginId",
+            GlobalOptions.LoginIdOptionName,
             credentials.LoginId,
-            "--password",
+            GlobalOptions.PasswordOptionName,
             credentials.Password,
-            "--accessIdentity",
+            GlobalOptions.AccessidentityOptionName,
             credentials.AccessIdentity.ToString(),
-            "--companyId",
+            GlobalOptions.CompanyidOptionName,
             companyId.ToString(),
-            "inventory-stock-status",
-            "get",
+            InventoryStockStatus.Main.Command.CommandName,
+            InventoryStockStatus.Get.Command.CommandName,
             LocalDateConverter.Serialize(Today()));
         using var console = new TestConsole();
 

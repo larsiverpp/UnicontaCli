@@ -5,9 +5,11 @@ namespace Liversen.UnicontaCli.InventoryStockStatus.Get;
 
 sealed class Command : System.CommandLine.Command
 {
+    public const string CommandName = "get";
+
     public Command(IServiceProviderFactory serviceProviderFactory)
         : base(
-            "get",
+            CommandName,
             """
             Gets inventory stock status at a given date.
             
