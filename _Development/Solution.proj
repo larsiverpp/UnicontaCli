@@ -26,8 +26,10 @@
     <Exec Command="dotnet test $(SolutionFile) -c $(Configuration) --no-restore --no-build --results-directory $(TestResultsDirectory) -- --report-trx --coverage --coverage-output-format cobertura $(TestFilter)" />
     <ItemGroup>
       <CoverageFile Include="$(TestResultsDirectory)\*.cobertura.xml" />
+      <CoverageReport Include="Cobertura;MarkdownAssembliesSummary" />
+      <CoverageReport Condition="'$(IncludeTestCoverage)' == 'true'" Include="Html" />
     </ItemGroup>
-    <ReportGenerator ReportFiles="@(CoverageFile)" TargetDirectory="$(TestReportDirectory)" ReportTypes="Cobertura;MarkdownAssembliesSummary" />
+    <ReportGenerator ReportFiles="@(CoverageFile)" TargetDirectory="$(TestReportDirectory)" ReportTypes="@(CoverageReport)" />
   </Target>
   <Target Name="_Clean">
     <RemoveDir Directories="$(MSBuildProjectDirectory)\bin;$(MSBuildProjectDirectory)\obj" ContinueOnError="true" />

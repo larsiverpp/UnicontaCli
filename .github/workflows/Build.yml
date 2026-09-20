@@ -14,20 +14,22 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: Restore
-        run: dotnet msbuild _Development/Solution.proj /t:_Restore /p:Configuration=Release
+        run: dotnet msbuild _Development/Solution.proj /t:_Restore
       - name: Build
         run: dotnet msbuild _Development/Solution.proj /t:_Build /p:Configuration=Release
       - name: Test
         run: dotnet msbuild _Development/Solution.proj /t:_Test /p:Configuration=Release
-      - name: Report test
+      - name: Test summary
         uses: dorny/test-reporter@v3
+        if: ${{ !cancelled() }}
         with:
-          name: Tests
+          name: Test summary
           path: _Development/obj/TestResults/*.trx
           reporter: dotnet-trx
-      - name: Report test coverage
+          report-title: Tests
+      - name: Test coverage summary
         run: |
-          cat _Development/obj/TestReport/Summary.md >> $GITHUB_STEP_SUMMARY
+          cat _Development/obj/TestReport/Summary.md | sed 's/# Summary/# Test coverage/g' >> $GITHUB_STEP_SUMMARY
   # codeql:
   #   name: CodeQL
   #   runs-on: ubuntu-latest
