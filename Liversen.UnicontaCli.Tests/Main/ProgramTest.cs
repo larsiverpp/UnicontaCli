@@ -36,6 +36,10 @@ public static class ProgramTest
         consoleError.ShouldBeEmpty();
     }
 
+    [Fact]
+    public static async Task GivenInvalidArguments_WhenExecuting_ThenExitCodeNonZero() =>
+        (await Program.Main([])).ShouldNotBe(0);
+
     static LocalDate Today() =>
         SystemClock.Instance.GetCurrentInstant().InUtc().LocalDateTime.Date;
 }

@@ -6,6 +6,17 @@ namespace Liversen.UnicontaCli;
 public static class IntegerValueTest
 {
     [Fact]
+    public static void GivenValue_WhenConstructing_ThenConstructed()
+    {
+        var value = ThreadLocalRandom.Next();
+
+        var sut = new TestInteger(value);
+
+        sut.Value.ShouldBe(value);
+        (sut with { }).ShouldBe(sut);
+    }
+
+    [Fact]
     public static void GivenInstance_WhenConvertingToString_ThenAsString()
     {
         var value = ThreadLocalRandom.Next();

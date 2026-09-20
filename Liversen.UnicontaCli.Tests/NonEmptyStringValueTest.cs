@@ -15,6 +15,17 @@ public static class NonEmptyStringValueTest
         Should.Throw<ArgumentException>(() => new TestString(" \t"));
 
     [Fact]
+    public static void GivenValue_WhenConstructing_ThenConstructed()
+    {
+        var value = ThreadLocalRandom.NextUcAlphaOrDigitString(10);
+
+        var sut = new TestString(value);
+
+        sut.Value.ShouldBe(value);
+        (sut with { }).ShouldBe(sut);
+    }
+
+    [Fact]
     public static void GivenInstance_WhenConvertingToString_ThenAsString()
     {
         var value = ThreadLocalRandom.NextUcAlphaOrDigitString(10);
