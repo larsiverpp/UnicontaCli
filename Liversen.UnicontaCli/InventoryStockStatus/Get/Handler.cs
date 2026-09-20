@@ -2,11 +2,10 @@
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using NodaTime;
 
 namespace Liversen.UnicontaCli.InventoryStockStatus.Get;
 
-class Handler : ICommandHandler<Parameters>
+sealed class Handler : ICommandHandler<Parameters>
 {
     readonly Helper helper;
     readonly IConsole console;

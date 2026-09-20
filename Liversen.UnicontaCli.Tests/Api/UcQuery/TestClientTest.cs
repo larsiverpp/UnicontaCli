@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Liversen.UnicontaCli.Api.UcQuery;
 
-public class TestClientTest
+public sealed class TestClientTest
 {
     readonly TestClient sut = new();
     readonly LocalDate today = UnicontaCli.TestData.RandomLocalDate();

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Liversen.UnicontaCli.InventoryStockStatus.Get;
 
-public class CommandTest : Test.Context
+public sealed class CommandTest : Test.Context
 {
     readonly RootCommand sut;
 

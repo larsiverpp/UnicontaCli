@@ -6,7 +6,7 @@ using Uniconta.DataModel;
 
 namespace Liversen.UnicontaCli.InventoryStockStatus.Get;
 
-class Helper
+sealed class Helper
 {
     public static readonly ImmutableArray<InvMovementType> IncludedMovementTypes =
     [

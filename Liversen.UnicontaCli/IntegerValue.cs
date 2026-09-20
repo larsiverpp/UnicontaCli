@@ -3,10 +3,10 @@ using System.Globalization;
 
 namespace Liversen.UnicontaCli;
 
-public record IntegerValue<TValue> : IComparable<TValue>
+public abstract record IntegerValue<TValue> : IComparable<TValue>
     where TValue : IntegerValue<TValue>
 {
-    public IntegerValue(int value)
+    protected IntegerValue(int value)
     {
         Value = value;
     }

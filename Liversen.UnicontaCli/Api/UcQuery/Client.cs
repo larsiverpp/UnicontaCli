@@ -10,7 +10,7 @@ using Uniconta.Common;
 
 namespace Liversen.UnicontaCli.Api.UcQuery;
 
-class Client : IClient
+sealed class Client : IClient
 {
     readonly QueryAPI inner;
 

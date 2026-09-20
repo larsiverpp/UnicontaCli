@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Liversen.UnicontaCli.Api.UcQuery;
 
-public class ClientTest : IClassFixture<TestFixture>
+public sealed class ClientTest : IClassFixture<TestFixture>
 {
     readonly Client sut;
     readonly LocalDate today = SystemClock.Instance.GetCurrentInstant().InUtc().Date;

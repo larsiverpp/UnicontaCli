@@ -6,7 +6,7 @@ using NodaTime;
 
 namespace Liversen.UnicontaCli.InventoryStockStatus.Get;
 
-record ItemCollection(
+sealed record ItemCollection(
     ImmutableArray<Item> Items)
 {
     public static readonly ItemRow HeaderRow = new(

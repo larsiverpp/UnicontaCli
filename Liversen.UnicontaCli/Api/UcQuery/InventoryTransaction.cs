@@ -4,7 +4,7 @@ using Uniconta.ClientTools.DataModel;
 
 namespace Liversen.UnicontaCli.Api.UcQuery;
 
-record InventoryTransaction(
+sealed record InventoryTransaction(
     InventoryNumber InventoryNumber,
 
     LocalDate Date,

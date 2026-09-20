@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Liversen.UnicontaCli.Api.UcQuery;
 
-class ClientSession : IClientSession
+sealed class ClientSession : IClientSession
 {
     readonly UcCredentials credentials;
     readonly CompanyId companyId;

@@ -2,7 +2,7 @@
 
 namespace Liversen.UnicontaCli.Api.UcQuery;
 
-record UcCredentials(
+sealed record UcCredentials(
     string LoginId,
 
     string Password,

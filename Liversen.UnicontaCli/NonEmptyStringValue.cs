@@ -2,10 +2,10 @@
 
 namespace Liversen.UnicontaCli;
 
-public record NonEmptyStringValue<TValue> : IComparable<TValue>
+public abstract record NonEmptyStringValue<TValue> : IComparable<TValue>
     where TValue : NonEmptyStringValue<TValue>
 {
-    public NonEmptyStringValue(string value)
+    protected NonEmptyStringValue(string value)
     {
         Value = value;
         if (string.IsNullOrWhiteSpace(value))

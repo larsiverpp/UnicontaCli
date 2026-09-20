@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Liversen.UnicontaCli.InventoryStockStatus.Get;
 
-class Command : System.CommandLine.Command
+sealed class Command : System.CommandLine.Command
 {
     public Command(IServiceProviderFactory serviceProviderFactory)
         : base(

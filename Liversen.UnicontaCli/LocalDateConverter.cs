@@ -10,13 +10,13 @@ static class LocalDateConverter
 
     public static DateTime ToDateTime(LocalDate value) =>
         new(
-            value.Year,
-            value.Month,
-            value.Day,
-            0,
-            0,
-            0,
-            DateTimeKind.Unspecified);
+            year: value.Year,
+            month: value.Month,
+            day: value.Day,
+            hour: 0,
+            minute: 0,
+            second: 0,
+            kind: DateTimeKind.Unspecified);
 
     public static LocalDate ParseExtendedFormat(string value) =>
         LocalDate.FromDateTime(DateTime.ParseExact(value, ExtendedFormat, CultureInfo.InvariantCulture));

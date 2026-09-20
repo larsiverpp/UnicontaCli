@@ -3,7 +3,7 @@ using NodaTime;
 
 namespace Liversen.UnicontaCli.InventoryStockStatus.Get;
 
-record Item(
+sealed record Item(
     Api.UcQuery.InventoryNumber InventoryNumber,
 
     string Name,

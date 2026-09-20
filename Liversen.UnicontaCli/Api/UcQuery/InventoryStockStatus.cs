@@ -4,7 +4,7 @@ using Uniconta.ClientTools.DataModel;
 
 namespace Liversen.UnicontaCli.Api.UcQuery;
 
-record InventoryStockStatus(
+sealed record InventoryStockStatus(
     InventoryNumber InventoryNumber,
 
     string Name,

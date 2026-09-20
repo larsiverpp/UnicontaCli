@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Liversen.UnicontaCli.InventoryStockStatus.Get;
 
-public record ItemRow(
+sealed record ItemRow(
     string InventoryNumber,
 
     string Name,
