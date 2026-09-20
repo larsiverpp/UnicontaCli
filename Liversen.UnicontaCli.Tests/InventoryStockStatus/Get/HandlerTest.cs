@@ -22,8 +22,8 @@ public sealed class HandlerTest : Test.Context
 
     static readonly ImmutableArray<Api.UcQuery.InventoryTransaction> TestTransactions =
     [
-        new(new("AB1234"), new(2025, 1, 1), 42, InvMovementType.Creditor),
-        new(new("AB123"), new(2024, 12, 30), 37, InvMovementType.Debtor)
+        new(new("AB1234"), new(2025, 1, 1), InvMovementType.Creditor),
+        new(new("AB123"), new(2024, 12, 30), InvMovementType.Debtor)
     ];
 
     public HandlerTest()

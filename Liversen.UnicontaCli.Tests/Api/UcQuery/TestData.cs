@@ -52,7 +52,6 @@ static class TestData
         new(
             InventoryNumber: inventoryNumber ?? RandomInventoryNumber(),
             Date: date ?? UnicontaCli.TestData.RandomLocalDate(),
-            Quantity: ThreadLocalRandom.Next(100),
             MovementType: movementType ?? UnicontaCli.TestData.RandomEnumValue<InvMovementType>());
 
     public static (string Prefix, string Suffix) Split(string value)

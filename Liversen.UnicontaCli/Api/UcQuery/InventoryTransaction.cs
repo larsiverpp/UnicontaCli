@@ -1,5 +1,4 @@
-﻿using System;
-using NodaTime;
+﻿using NodaTime;
 using Uniconta.ClientTools.DataModel;
 
 namespace Liversen.UnicontaCli.Api.UcQuery;
@@ -9,8 +8,6 @@ sealed record InventoryTransaction(
 
     LocalDate Date,
 
-    decimal Quantity,
-
     // Seen types: Debtor, Creditor, Adjustment, IncludedInBOM, ReportAsFinished
     Uniconta.DataModel.InvMovementType MovementType)
 {
@@ -18,6 +15,5 @@ sealed record InventoryTransaction(
         new(
             InventoryNumber: new(value.Item),
             Date: new(value.Date.Year, value.Date.Month, value.Date.Day),
-            Quantity: Convert.ToDecimal(value.Qty),
             MovementType: value.MovementTypeEnum);
 }
