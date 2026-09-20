@@ -19,6 +19,15 @@ jobs:
         run: dotnet msbuild _Development/Solution.proj /t:_Build /p:Configuration=Release
       - name: Test
         run: dotnet msbuild _Development/Solution.proj /t:_Test /p:Configuration=Release
+      - name: Report test
+        uses: dorny/test-reporter@v3
+        with:
+          name: Tests
+          path: _Development/obj/TestResults/*.trx
+          reporter: dotnet-trx
+      - name: Report test coverage
+        run: |
+          cat _Development/obj/TestReport/Summary.md >> $GITHUB_STEP_SUMMARY
   # codeql:
   #   name: CodeQL
   #   runs-on: ubuntu-latest

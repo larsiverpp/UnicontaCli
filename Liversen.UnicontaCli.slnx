@@ -7,7 +7,7 @@
     <File Path="README.md" />
   </Folder>
   <Folder Name="/Solution Items/Workflows/">
-    <File Path=".github/workflows/dotnet.yml" />
+    <File Path=".github/workflows/Build.yml" />
   </Folder>
   <Project Path="Liversen.UnicontaCli.Tests/Liversen.UnicontaCli.Tests.csproj">
     <Platform Project="x64" />
