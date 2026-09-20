@@ -1,4 +1,5 @@
-﻿using System.CommandLine;
+﻿using System.Collections.Immutable;
+using System.CommandLine;
 using System.Threading.Tasks;
 
 namespace Liversen.UnicontaCli.Main;
@@ -6,9 +7,9 @@ namespace Liversen.UnicontaCli.Main;
 static class Program
 {
     internal static Task<int> Main(string[] args) =>
-        MainInner(args, new Console());
+        Execute([.. args], new Console());
 
-    internal static async Task<int> MainInner(string[] args, IConsole console)
+    internal static async Task<int> Execute(ImmutableArray<string> args, IConsole console)
     {
         var globalOptions = new GlobalOptions();
         var serviceProviderFactory = new ServiceProviderFactory(globalOptions, console);
