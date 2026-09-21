@@ -1,12 +1,16 @@
 <Project>
   <Import Project="Project.targets" />
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsTestProject>true</IsTestProject>
+    <TestingPlatformCommandLineArguments Condition="'$(RunAllTests)' != 'true'">--filter-not-trait "Category=Unstable"</TestingPlatformCommandLineArguments>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="DiffEngine" Version="20.3.1" />
     <!-- Xunit3 v3 does not support MTP v2 -->
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="[18.0.6]" />
     <!-- Xunit3 v3 does not support MTP v2 -->
     <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="[1.9.1]" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
     <PackageReference Include="Shouldly" Version="4.3.0" />
     <PackageReference Include="xunit.v3" Version="3.2.2" LockMajorVersion="true" />
   </ItemGroup>

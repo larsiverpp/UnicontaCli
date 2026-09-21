@@ -20,10 +20,10 @@
     <PropertyGroup>
       <TestResultsDirectory>$(MSBuildProjectDirectory)\obj\TestResults</TestResultsDirectory>
       <TestReportDirectory>$(MSBuildProjectDirectory)\obj\TestReport</TestReportDirectory>
-      <TestFilter Condition="'$(TestFilter)' == '' And '$(RunAllTests)' != 'true'">--filter-not-trait &quot;Category=Unstable&quot;</TestFilter>
+      <TestArguments Condition="'$(RunAllTests)' == 'true'">$(TestArguments) -p:RunAllTests=true</TestArguments>
     </PropertyGroup>
     <RemoveDir Directories="$(TestResultsDirectory);$(TestReportDirectory)" />
-    <Exec Command="dotnet test $(SolutionFile) -c $(Configuration) --no-restore --no-build --results-directory $(TestResultsDirectory) -- --report-trx --coverage --coverage-output-format cobertura $(TestFilter)" />
+    <Exec Command="dotnet test $(SolutionFile) -c $(Configuration) --no-restore --no-build --results-directory $(TestResultsDirectory) $(TestArguments) -- --report-trx --coverage --coverage-output-format cobertura" />
     <ItemGroup>
       <CoverageFile Include="$(TestResultsDirectory)\*.cobertura.xml" />
       <CoverageReport Include="Cobertura;MarkdownAssembliesSummary" />
