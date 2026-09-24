@@ -1,7 +1,7 @@
 name: Build
 on: [push]
 env:
-  DOTNET_VERSION: 10.0.401
+  DOTNET_SDK_VERSION: 10.0.401
 jobs:
   build:
     name: Build
@@ -12,7 +12,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
       - name: Restore
         run: dotnet msbuild _Development/Solution.proj /t:_Restore
       - name: Build
@@ -30,28 +30,4 @@ jobs:
       - name: Test coverage summary
         run: |
           cat _Development/obj/TestReport/Summary.md | sed 's/# Summary/# Test coverage/g' >> $GITHUB_STEP_SUMMARY
-  # codeql:
-  #   name: CodeQL
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     security-events: write
-  #     packages: read
-  #     actions: read
-  #     contents: read
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v6
-  #     - name: CodeQL Initialize
-  #       uses: github/codeql-action/init@v4
-  #       with:
-  #         languages: csharp
-  #     - name: Setup .NET
-  #       uses: actions/setup-dotnet@v4
-  #       with:
-  #         dotnet-version: ${{ env.DOTNET_VERSION }}
-  #     - name: Restore
-  #       run: dotnet msbuild _Development/Solution.proj /t:_Restore /p:Configuration=Release
-  #     - name: Build
-  #       run: dotnet msbuild _Development/Solution.proj /t:_BuildNoRestore /p:Configuration=Release
-  #     - name: CodeQL Analyze
-  #       uses: github/codeql-action/analyze@v4
+  
