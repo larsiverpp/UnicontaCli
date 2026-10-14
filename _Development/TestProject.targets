@@ -6,7 +6,7 @@
     <TestingPlatformCommandLineArguments Condition="'$(RunAllTests)' != 'true'">--filter-not-trait "Category=Unstable"</TestingPlatformCommandLineArguments>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="DiffEngine" Version="20.3.1" />
+    <PackageReference Include="DiffEngine" Version="20.8.1" />
     <!-- Xunit3 v3 does not support MTP v2 -->
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="[18.0.6]" />
     <!-- Xunit3 v3 does not support MTP v2 -->

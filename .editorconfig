@@ -5,6 +5,7 @@ csharp_style_prefer_primary_constructors = false:silent
 
 # StyleCop Analyzers
 dotnet_diagnostic.SA1101.severity = none # PrefixLocalCallsWithThis
+dotnet_diagnostic.SA1115.severity = none # ParameterMustFollowComma
 dotnet_diagnostic.SA1118.severity = none # ParameterMustNotSpanMultipleLines
 dotnet_diagnostic.SA1204.severity = none # StaticElementsMustAppearBeforeInstanceElements
 dotnet_diagnostic.SA1400.severity = none # AccessModifierMustBeDeclared
