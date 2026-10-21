@@ -23,16 +23,16 @@
     <CompilerVisibleProperty Include="DC1001_NamespacePrefixes" />
     <None Include="$(MSBuildThisFileDirectory)\stylecop.json" />
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)\stylecop.json" Link="stylecop.json" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.3.109-beta">
+    <PackageReference Include="StyleCop.Analyzers">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.402">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.35.0.4138">
+    <PackageReference Include="SonarAnalyzer.CSharp">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Liversen.DependencyCop" Version="1.0.0">
+    <PackageReference Include="Liversen.DependencyCop">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
