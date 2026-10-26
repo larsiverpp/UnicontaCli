@@ -43,6 +43,8 @@ jobs:
       - name: Build
         run: dotnet msbuild _Development/Solution.proj /t:_Build /p:Configuration=Release
       - name: Test
+        env:
+          IncludeTestCoverage: ${{ inputs.generate_code_coverage }}
         run: dotnet msbuild _Development/Solution.proj /t:_Test /p:Configuration=Release
       - name: Test summary
         uses: dorny/test-reporter@v3
@@ -59,4 +61,3 @@ jobs:
       - name: CodeQL Analyze
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_codeql }}
         uses: github/codeql-action/analyze@v4
-      
