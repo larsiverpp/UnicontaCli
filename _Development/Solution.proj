@@ -21,15 +21,16 @@
       <TestResultsDirectory>$(MSBuildProjectDirectory)\obj\TestResults</TestResultsDirectory>
       <TestReportDirectory>$(MSBuildProjectDirectory)\obj\TestReport</TestReportDirectory>
       <TestArguments Condition="'$(RunAllTests)' == 'true'">$(TestArguments) -p:RunAllTests=true</TestArguments>
+      <TestCoverageArguments Condition="'$(IncludeTestCoverage)' == 'true'"> --coverage --coverage-output-format cobertura</TestCoverageArguments>
     </PropertyGroup>
     <RemoveDir Directories="$(TestResultsDirectory);$(TestReportDirectory)" />
-    <Exec Command="dotnet test $(SolutionFile) -c $(Configuration) --no-restore --no-build --results-directory $(TestResultsDirectory) $(TestArguments) -- --report-trx --coverage --coverage-output-format cobertura" />
+    <Exec Command="dotnet test $(SolutionFile) -c $(Configuration) --no-restore --no-build --results-directory $(TestResultsDirectory) $(TestArguments) -- --report-trx $(TestCoverageArguments)" />
     <ItemGroup>
       <CoverageFile Include="$(TestResultsDirectory)\*.cobertura.xml" />
       <CoverageReport Include="Cobertura;MarkdownAssembliesSummary" />
-      <CoverageReport Condition="'$(IncludeTestCoverage)' == 'true'" Include="Html" />
+      <CoverageReport Condition="'$(IncludeTestCoverageHtml)' == 'true'" Include="Html" />
     </ItemGroup>
-    <ReportGenerator ReportFiles="@(CoverageFile)" TargetDirectory="$(TestReportDirectory)" ReportTypes="@(CoverageReport)" />
+    <ReportGenerator Condition="'$(IncludeTestCoverage)' == 'true'" ReportFiles="@(CoverageFile)" TargetDirectory="$(TestReportDirectory)" ReportTypes="@(CoverageReport)" />
   </Target>
   <Target Name="_Clean">
     <RemoveDir Directories="$(MSBuildProjectDirectory)\bin;$(MSBuildProjectDirectory)\obj" ContinueOnError="true" />
