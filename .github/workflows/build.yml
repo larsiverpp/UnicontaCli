@@ -4,7 +4,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: 4 18 * * *
+    - cron: 0 6 * * *
   workflow_dispatch:
     inputs:
       include_codeql:
@@ -19,6 +19,8 @@ on:
         default: false
 env:
   DOTNET_SDK_VERSION: 10.0.x
+  IncludeCodeQL: ${{ (github.event_name == 'workflow_dispatch' && inputs.include_codeql) || github.event_name == 'schedule' }}
+  IncludeTestCoverage: ${{ (github.event_name == 'workflow_dispatch' && inputs.include_test_coverage) || github.event_name == 'schedule' }}
 jobs:
   build:
     name: Build
@@ -35,7 +37,7 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
       - name: CodeQL Init
-        if: ${{ (github.event_name == 'workflow_dispatch' && inputs.include_codeql) || github.event_name == 'schedule' }}
+        if: env.IncludeCodeQL == 'true'
         uses: github/codeql-action/init@v4
         with:
           languages: csharp
@@ -45,8 +47,6 @@ jobs:
       - name: Build
         run: dotnet msbuild _Development/Solution.proj /t:_Build /p:Configuration=Release
       - name: Test
-        env:
-          IncludeTestCoverage: ${{ (github.event_name == 'workflow_dispatch' && inputs.include_test_coverage) || github.event_name == 'schedule' }}
         run: dotnet msbuild _Development/Solution.proj /t:_Test /p:Configuration=Release
       - name: Test summary
         uses: dorny/test-reporter@v3
@@ -57,9 +57,9 @@ jobs:
           reporter: dotnet-trx
           report-title: Tests
       - name: Test coverage summary
-        if: ${{ (github.event_name == 'workflow_dispatch' && inputs.include_test_coverage) || github.event_name == 'schedule' }}
+        if: env.IncludeTestCoverage == 'true'
         run: |
           cat _Development/obj/TestReport/Summary.md | sed 's/# Summary/# Test coverage/g' >> $GITHUB_STEP_SUMMARY
       - name: CodeQL Analyze
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.include_codeql || github.event_name == 'schedule' }}
+        if: env.IncludeCodeQL == 'true'
         uses: github/codeql-action/analyze@v4
