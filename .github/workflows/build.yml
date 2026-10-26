@@ -5,13 +5,13 @@ on:
       - main
   workflow_dispatch:
     inputs:
-      run_codeql:
-        description: 'Run CodeQL'
+      include_codeql:
+        description: 'Include CodeQL'
         required: true
         type: boolean
         default: false
-      generate_code_coverage:
-        description: 'Generate code coverage'
+      include_test_coverage:
+        description: 'Include test coverage'
         required: true
         type: boolean
         default: false
@@ -33,7 +33,7 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
       - name: CodeQL Init
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_codeql }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.include_codeql }}
         uses: github/codeql-action/init@v4
         with:
           languages: csharp
@@ -44,7 +44,7 @@ jobs:
         run: dotnet msbuild _Development/Solution.proj /t:_Build /p:Configuration=Release
       - name: Test
         env:
-          IncludeTestCoverage: ${{ inputs.generate_code_coverage }}
+          IncludeTestCoverage: ${{ inputs.include_test_coverage }}
         run: dotnet msbuild _Development/Solution.proj /t:_Test /p:Configuration=Release
       - name: Test summary
         uses: dorny/test-reporter@v3
@@ -55,9 +55,9 @@ jobs:
           reporter: dotnet-trx
           report-title: Tests
       - name: Test coverage summary
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.generate_code_coverage }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.include_test_coverage }}
         run: |
           cat _Development/obj/TestReport/Summary.md | sed 's/# Summary/# Test coverage/g' >> $GITHUB_STEP_SUMMARY
       - name: CodeQL Analyze
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_codeql }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.include_codeql }}
         uses: github/codeql-action/analyze@v4
