@@ -2,6 +2,7 @@
   <Import Project="Base.props" />
   <PropertyGroup>
     <NeutralLanguage>en-GB</NeutralLanguage>
+    <NuGetAudit>true</NuGetAudit>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
