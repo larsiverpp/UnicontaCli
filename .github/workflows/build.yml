@@ -49,7 +49,7 @@ jobs:
       - name: Test
         run: dotnet msbuild _Development/Solution.proj /t:_Test /p:Configuration=Release
       - name: Test summary
-        uses: dorny/test-reporter@v3
+        uses: dorny/test-reporter@2bf7bc7bba0f63da7f183274c61b24c27fb03989
         if: ${{ !cancelled() }}
         with:
           name: Test summary
