@@ -6,7 +6,7 @@
     <SolutionFile Condition="'$(SolutionFile)' == ''">$(SolutionDir)\$(SolutionName).slnx</SolutionFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ReportGenerator" />
+    <PackageReference Include="ReportGenerator" Version="5.6.0" />
   </ItemGroup>
   <Target Name="_Restore">
     <MSBuild Projects="$(SolutionFile);$(MSBuildThisFileFullPath)" Targets="restore" BuildInParallel="true" />
