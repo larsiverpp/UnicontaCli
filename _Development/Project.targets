@@ -4,7 +4,7 @@
     <NeutralLanguage>en-GB</NeutralLanguage>
     <NuGetAudit>true</NuGetAudit>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-    <RestoreLockedMode Condition="'$(RestoreLockedMode)' != ''">true</RestoreLockedMode>
+    <RestoreLockedMode Condition="'$(RestoreLockedMode)' == ''">true</RestoreLockedMode>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -26,13 +26,13 @@
     <CompilerVisibleProperty Include="DC1001_NamespacePrefixes" />
     <None Include="$(MSBuildThisFileDirectory)\stylecop.json" />
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)\stylecop.json" Link="stylecop.json" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.3.109-beta">
+    <PackageReference Include="StyleCop.Analyzers" Version="1.3.180">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.403">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.404">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.35.0.4138">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.36.0.15337">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Liversen.DependencyCop" Version="1.0.0">

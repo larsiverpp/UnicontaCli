@@ -6,7 +6,7 @@
     <TestingPlatformCommandLineArguments Condition="'$(RunAllTests)' != 'true'">--filter-not-trait "Category=Unstable"</TestingPlatformCommandLineArguments>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="DiffEngine" Version="20.8.2" />
+    <PackageReference Include="DiffEngine" Version="20.9.0" />
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="[18.0.6]" />
     <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="[1.9.1]" />
     <PackageReference Include="Shouldly" Version="4.3.0" />
