@@ -49,7 +49,7 @@ public static class ItemCollectionTest
     public static void GivenCollection_WhenGettingRows_ThenRows()
     {
         var collection = new ItemCollection(Items);
-        collection.Rows(TestCulture, ValueAt).ShouldBe(
+        collection.Rows(TestCulture, ValueAt, false).ShouldBe(
         [
             ItemCollection.HeaderRow,
             ..Items.Select(x => x.ToItemRow(TestCulture)),

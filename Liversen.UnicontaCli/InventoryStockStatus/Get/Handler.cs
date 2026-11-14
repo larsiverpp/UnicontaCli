@@ -21,7 +21,7 @@ sealed class Handler : ICommandHandler<Parameters>
     public async Task Run(Parameters parameters)
     {
         var collection = await helper.Get(parameters.ValueAt);
-        var rows = collection.Rows(parameters.Culture, parameters.ValueAt);
+        var rows = collection.Rows(parameters.Culture, parameters.ValueAt, skipFooterRow: parameters.CsvOutput);
         var lines = parameters.CsvOutput ? ItemRow.ToCsvLines(rows) : ItemRow.ToScreenLines(rows);
         if (string.IsNullOrEmpty(parameters.OutputPath))
         {

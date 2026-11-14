@@ -66,7 +66,6 @@ public sealed class HandlerTest : Test.Context
             "InventoryNumber\tName\tQuantity\tFullValue\tLastMovement\tFraction\tReducedValue",
             "AB123\tExpensive valve\t5\t120.00\t2024-12-30\t0.50\t60.00",
             "AB1234\tValve\t10\t12.00\t2025-01-01\t1.00\t12.00",
-            "TOTALS [2025-12-31]\t\t\t132.00\t\t\t72.00",
             string.Empty
         ]);
     }
@@ -85,8 +84,7 @@ public sealed class HandlerTest : Test.Context
         [
             "InventoryNumber\tName\tQuantity\tFullValue\tLastMovement\tFraction\tReducedValue",
             "AB123\tExpensive valve\t5\t120.00\t2024-12-30\t0.50\t60.00",
-            "AB1234\tValve\t10\t12.00\t2025-01-01\t1.00\t12.00",
-            "TOTALS [2025-12-31]\t\t\t132.00\t\t\t72.00"
+            "AB1234\tValve\t10\t12.00\t2025-01-01\t1.00\t12.00"
         ]);
     }
 

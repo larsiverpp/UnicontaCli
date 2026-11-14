@@ -27,11 +27,11 @@ sealed record ItemCollection(
     public static string TotalsLabel(LocalDate valueAt) =>
         $"TOTALS [{LocalDateConverter.Serialize(valueAt)}]";
 
-    public ImmutableArray<ItemRow> Rows(CultureInfo cultureInfo, LocalDate valueAt) =>
+    public ImmutableArray<ItemRow> Rows(CultureInfo cultureInfo, LocalDate valueAt, bool skipFooterRow) =>
     [
         HeaderRow,
         ..ItemRows(cultureInfo),
-        FooterRow(cultureInfo, valueAt)
+        .. skipFooterRow ? [] : ImmutableArray.Create(FooterRow(cultureInfo, valueAt))
     ];
 
     public IEnumerable<ItemRow> ItemRows(CultureInfo cultureInfo) =>
